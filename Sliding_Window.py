@@ -15,7 +15,7 @@ class SlidingWindowRateLimiter:
         if user_id in self.user_messages:
             while (
                 self.user_messages[user_id]
-                and self.user_messages[user_id][0] < current_time
+                and self.user_messages[user_id][0] < current_time - self.window_size
             ):
                 self.user_messages[user_id].popleft()
 
