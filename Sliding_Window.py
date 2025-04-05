@@ -20,6 +20,7 @@ class SlidingWindowRateLimiter:
                 self.user_messages[user_id].popleft()
 
     def can_send_message(self, user_id: str) -> bool:
+        self._cleanup_window(user_id)
         return len(self.user_messages.get(user_id, deque())) < self.max_requests
 
     def record_message(self, user_id: str) -> bool:
